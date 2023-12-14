@@ -71,3 +71,55 @@ elif mode == "2":
     joueur_vs_ordinateur()
 else:
     print("Mode invalide. Veuillez choisir 1 ou 2. ")
+
+
+
+    while True:
+        mode = input("Choisissez le mode de jeu (1 pour joueur vs joueur, 2 pour joueur vs ordinateur, ou q pour quitter) : ")
+
+        if mode == "1":
+            joueur_vs_joueur()
+        elif mode == "2":
+            joueur_vs_ordinateur()
+        elif mode.lower() == "q":
+            break
+        else:
+            print("Mode invalide. Veuillez choisir 1, 2 ou q.")
+
+print("Merci d'avoir joué ! Au revoir.")
+
+
+def relancer_jeu():
+    # Demande au joueur s'il souhaite rejouer
+    rejouer = input("\nVoulez-vous rejouer ? (o/n) : ")
+
+    if rejouer.lower() == "o":
+        # Réinitialise les paramètres du jeu
+        joueur1 = input("Nom du joueur 1 : ")
+        joueur2 = input("Nom du joueur 2 : ")
+        jeu = JeuDeNim(joueur1, joueur2)
+
+        # Boucle principale du jeu
+        while jeu.allumettes_restantes > 0:
+            # ...
+
+        # Affiche le gagnant
+            print(f"\nBravo ! {jeu.joueur_gagnant()} a gagné.")
+
+        # Relance le jeu
+        relancer_jeu()
+    else:
+        print("Merci d'avoir joué ! Au revoir.")
+
+# Exécution du jeu
+mode = input("Choisissez le mode de jeu (1 pour joueur vs joueur, 2 pour joueur vs ordinateur) : ")
+
+if mode == "1":
+    joueur_vs_joueur()
+elif mode == "2":
+    joueur_vs_ordinateur()
+else:
+    print("Mode invalide. Veuillez choisir 1 ou 2. ")
+
+# Demande si le joueur souhaite relancer le jeu après avoir gagné
+relancer_jeu()
