@@ -86,9 +86,9 @@ while True:
         joueur_vs_ordinateur()
     elif mode.lower() == "q": # La méthode lower() renvoie une chaîne où tous les caractères sont en minuscules. Les symboles et les nombres sont ignorés. 
         # Sort de la boucle si l'utilisateur choisit de quitter
-        break
+        break # l’instruction break vous donne la possibilité de quitter une boucle au moment où une condition externe est déclenchée.
     else:
         print("Mode invalide. Veuillez choisir 1, 2 ou q.")
 
 # Affiche un message de remerciement
-print("Merci d'avoir joué ! Au revoir.")
+print("Merci d'avoir joué ! Au revoir.") 
