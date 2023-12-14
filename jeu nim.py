@@ -84,7 +84,7 @@ while True:
         joueur_vs_joueur()
     elif mode == "2":
         joueur_vs_ordinateur()
-    elif mode.lower() == "q":
+    elif mode.lower() == "q": # La méthode lower() renvoie une chaîne où tous les caractères sont en minuscules. Les symboles et les nombres sont ignorés. 
         # Sort de la boucle si l'utilisateur choisit de quitter
         break
     else:
