@@ -77,7 +77,7 @@ else:
 # Boucle principale pour permettre à l'utilisateur de continuer à jouer
 while True:
     # Demande à l'utilisateur de choisir le mode de jeu ou de quitter
-    mode = input("Choisissez le mode de jeu (1 pour joueur vs joueur, 2 pour joueur vs ordinateur, ou q pour quitter) : ")
+    mode = input("Choisissez le mode de jeu (1 pour joueur vs joueur, 2 pour joueur vs ordinateur, ou Exit pour quitter) : ")
 
     # Vérifie le mode choisi et exécute la fonction correspondante
     if mode == "1":
@@ -88,7 +88,7 @@ while True:
         # Sort de la boucle si l'utilisateur choisit de quitter
         break # l’instruction break vous donne la possibilité de quitter une boucle au moment où une condition externe est déclenchée.
     else:
-        print("Mode invalide. Veuillez choisir 1, 2 ou q.")
+        print("Mode invalide. Veuillez choisir 1, 2 ou Exit.")
 
 # Affiche un message de remerciement
 print("Merci d'avoir joué ! Au revoir.") 
