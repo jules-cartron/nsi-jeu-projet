@@ -80,29 +80,24 @@ class NimGameGUI:
             messagebox.showwarning("Erreur", "Veuillez choisir un mode de jeu.")
             return
 
-        jeu_nim = JeuDeNim(nom_joueur1, nom_joueur2)
+        self.jeu_nim = JeuDeNim(nom_joueur1, nom_joueur2)
+        self.mettre_a_jour_etat_jeu()
 
-        if mode == "1":
-            self.joueur_vs_joueur(jeu_nim)
-        elif mode == "2":
-            self.joueur_vs_ordinateur(jeu_nim)
-
-    def mettre_a_jour_etat_jeu(self, jeu):
-        if jeu.allumettes_restantes > 0:
-            reste_allumettes = "I" * (jeu.allumettes_restantes)
-            self.etat_jeu_label.config(text=f"{reste_allumettes}\nC'est au tour de {jeu.joueurs[jeu.tour]}", font=("Arial", 12))
-            if jeu.tour == 1:
-                self.traiter_tour_ordinateur(jeu)
+    def mettre_a_jour_etat_jeu(self):
+        if self.jeu_nim.allumettes_restantes > 0:
+            reste_allumettes = "I" * (self.jeu_nim.allumettes_restantes)
+            self.etat_jeu_label.config(text=f"{reste_allumettes}\nC'est au tour de {self.jeu_nim.joueurs[self.jeu_nim.tour]}", font=("Arial", 12))
+            if self.jeu_nim.tour == 1:
+                self.traiter_tour_ordinateur()
         else:
-            self.afficher_gagnant(jeu.joueur_gagnant())
+            self.afficher_gagnant(self.jeu_nim.joueur_gagnant())
 
-    def traiter_tour_ordinateur(self, jeu):
-        choix_ordi = jeu.jouer_tour_ordinateur()
+    def traiter_tour_ordinateur(self):
+        choix_ordi = self.jeu_nim.jouer_tour_ordinateur()
         if choix_ordi is not None:
-            self.mettre_a_jour_etat_jeu(jeu)
+            self.mettre_a_jour_etat_jeu()
 
     def traiter_choix_joueur(self):
-        nom_joueur = self.jeu_nim.joueurs[self.jeu_nim.tour]
         try:
             choix = int(self.choix_joueur_entry.get())
         except ValueError:
@@ -110,32 +105,7 @@ class NimGameGUI:
             return
 
         if self.jeu_nim.jouer_tour(choix):
-            self.mettre_a_jour_etat_jeu(self.jeu_nim)
-
-    def joueur_vs_joueur(self, jeu):
-        while jeu.allumettes_restantes > 0:
-            self.mettre_a_jour_etat_jeu(jeu)
-            choix = simpledialog.askinteger("Choix du joueur", f"{jeu.joueurs[jeu.tour]}, combien d'allumettes voulez-vous enlever (1-3) ?")
-            if choix is None:
-                break
-            if not jeu.jouer_tour(choix):
-                continue
-
-        self.afficher_gagnant(jeu.joueur_gagnant())
-
-    def joueur_vs_ordinateur(self, jeu):
-        while jeu.allumettes_restantes > 0:
-            self.mettre_a_jour_etat_jeu(jeu)
-            if jeu.tour == 1:
-                self.traiter_tour_ordinateur(jeu)
-            else:
-                choix = simpledialog.askinteger("Choix du joueur", f"{jeu.joueurs[jeu.tour]}, combien d'allumettes voulez-vous enlever (1-3) ?")
-                if choix is None:
-                    break
-                if not jeu.jouer_tour(choix):
-                    continue
-
-        self.afficher_gagnant(jeu.joueur_gagnant())
+            self.mettre_a_jour_etat_jeu()
 
     def afficher_gagnant(self, gagnant):
         messagebox.showinfo("Bravo !", f"Bravo ! {gagnant} a gagné.")
