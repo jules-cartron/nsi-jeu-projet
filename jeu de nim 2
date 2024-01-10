@@ -1,0 +1,35 @@
+# Définit une fonction pour afficher l'état du jeu
+def afficher_etat(allumettes_restantes):
+    print(f"\nAllumettes restantes : {allumettes_restantes}")
+
+# Définit une fonction pour permettre à un joueur de faire un tour
+def jouer_tour(joueur, allumettes_restantes):
+    while True:  # Boucle infinie pour s'assurer que l'utilisateur entre une valeur valide
+        try:
+            # Demande à l'utilisateur de choisir le nombre d'allumettes à enlever
+            choix = int(input(f"{joueur}, combien d'allumettes voulez-vous enlever (1-3) ? "))
+            
+            # Vérifie si le choix est valide
+            if 1 <= choix <= 3 and choix <= allumettes_restantes:
+                return allumettes_restantes - choix  # Retourne le nouvel état du jeu
+            else:
+                print("Choix invalide. Veuillez choisir entre 1 et 3 allumettes.")
+        except ValueError:
+            print("Veuillez entrer un nombre entier.")  # Gère l'erreur si l'utilisateur n'entre pas un nombre
+
+# Fonction principale qui met en place le jeu de Nim
+def jeu_de_nim():
+    allumettes_restantes = 21
+    joueurs = ["Joueur 1", "Joueur 2"]
+    tour = 0
+
+    while allumettes_restantes > 0:
+        afficher_etat(allumettes_restantes)  # Affiche l'état actuel du jeu
+        joueur_actuel = joueurs[tour]  # Détermine le joueur actuel
+        allumettes_restantes = jouer_tour(joueur_actuel, allumettes_restantes)  # Exécute le tour du joueur
+        tour = 1 - tour  # Passe au joueur suivant
+
+    print(f"\nBravo ! {joueurs[tour]} a gagné.")  # Annonce le joueur gagnant à la fin du jeu
+
+# Exécution du jeu
+jeu_de_nim()
